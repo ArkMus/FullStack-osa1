@@ -1,6 +1,24 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
+const countAll = (a, b, c) => {
+  return (a + b + c)
+}
+
+const averageRate = (a, b, c) => {
+  if(c === 0) {
+    return 0
+  }
+  return ((a - b) / c)
+}
+
+const averagePos = function(a, b) {
+  if (b === 0) {
+    return 0
+  } 
+  return (a / b)
+}
+
 const App = () => {
   // tallenna napit omaan tilaansa
   const [good, setGood] = useState(0)
@@ -27,6 +45,9 @@ const App = () => {
       <p>good {good}</p>
       <p>neutral {neutral}</p>
       <p>bad {bad}</p>
+      <p>all {countAll(good, neutral, bad)}</p>
+      <p>average {averageRate(good, bad, countAll(good, neutral, bad))}</p>
+      <p>positive {averagePos(good, countAll(good, neutral, bad))}%</p>
     </div>
   )
 }
