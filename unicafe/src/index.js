@@ -16,7 +16,34 @@ const averagePos = function(a, b) {
   if (b === 0) {
     return 0
   } 
-  return (a / b)
+  return (a / b) * 100
+}
+
+const Statistics = ({ good, neutral, bad }) => {
+  const cA = countAll(good, neutral, bad)
+  const aR = averageRate(good, bad, countAll(good, neutral, bad))
+  const aP = averagePos(good, countAll(good, neutral, bad))
+
+  if(cA === 0) {
+    return (
+      <div>
+        <h1>statistics</h1>
+        <p>No feedback given</p>
+      </div>
+    )
+  }
+
+  return(
+    <div>
+    <h1>statistics</h1>
+    <p>good {good}</p>
+    <p>neutral {neutral}</p>
+    <p>bad {bad}</p>
+    <p>all {cA}</p>
+    <p>average {aR}</p>
+    <p>positive {aP}%</p>
+  </div>
+  )
 }
 
 const App = () => {
@@ -41,13 +68,8 @@ const App = () => {
         bad
       </button>
 
-      <h1>statistics</h1>
-      <p>good {good}</p>
-      <p>neutral {neutral}</p>
-      <p>bad {bad}</p>
-      <p>all {countAll(good, neutral, bad)}</p>
-      <p>average {averageRate(good, bad, countAll(good, neutral, bad))}</p>
-      <p>positive {averagePos(good, countAll(good, neutral, bad))}%</p>
+      <Statistics good={good} neutral={neutral} bad={bad}/>
+
     </div>
   )
 }
